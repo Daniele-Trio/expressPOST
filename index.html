@@ -4,14 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form action="comment" method="post">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome">
+    <h1>Form studente</h1>
+    <div id="form-container">
+        
+        <form action="comment" method="post" name="formStudente" id="formStudente">
+            <div id="label-container"><label for="matricola">Matricola</label></div>
+            <div><input type="text" id="matricola" name="matricola"></div>
 
-        <input type="submit">
-        <input type="reset">
-    </form>
+            <div id="label-container"><label for="cf">Codice fiscale</label></div>
+            <div><input type="text" id="cf" name="cf"></div>
+
+            <div id="label-container"><label for="nome">Nome</label></div>
+            <div><input type="text" id="nome" name="nome"></div>
+    
+            <div id="label-container"><label for="cognome">Cognome</label></div>
+            <div><input type="text" id="cognome" name="cognome"></div>
+
+            <div id="label-container"><label for="">Sesso</label></div>
+            <div id="label-container">
+                
+                <input type="radio" id="sessoM" name="sesso" value="maschio" checked>
+                <label for="sessoM">Maschio</label>
+                <input type="radio" id="sessoF" name="sesso" value="femmina">
+                <label for="sessoF">Femmina</label>
+            </div>
+    
+            <div id="label-container">
+                <input type="submit" id="submitButton">
+                <input type="reset" value="Reset">
+            </div>
+            
+        </form>
+    </div>
 </body>
+<script>
+    const submitButton = document.querySelector("#submitButton");
+    submitButton.addEventListener("click", e =>{
+
+        e.preventDefault();
+
+        let matricola = formStudente.matricola.value;
+        let cf = formStudente.cf.value;
+        let nome = formStudente.nome.value;
+        let cognome = formStudente.cognome.value;
+        let radio = document.getElementsByName("sesso");
+        let sesso = "";
+
+        for(const r of radio){
+
+            if(r.checked){
+                sesso = r.value;
+            }
+
+        }
+
+        if(isNaN(matricola)){
+
+            alert("Matricola deve essere un numero");
+            return;
+
+        }
+
+        if(cf.length < 16){
+
+            alert("Lunghezza codice fiscale errata");
+            return;
+
+        }
+
+        if(matricola == "" || cf == "" || nome == "" || cognome == "" || sesso == ""){
+
+            alert("Devi compilare tutti i campi");
+            return;
+
+        }
+        console.log(isNaN(matricola));
+        
+        
+
+        console.log(`${matricola}, ${cf}, ${nome}, ${cognome}, ${sesso}`);
+        let form = document.querySelector("#formStudente");
+        form.submit();
+
+    })
+</script>
 </html>
